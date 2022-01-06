@@ -10,10 +10,10 @@ class Player(pygame.sprite.Sprite):
     def __init__(self, pos):
         super().__init__()
         self.image = load_image('floor.png', -1)
-        self.idle = AnimatedSprite('player/Idle.png', 8, 1).frames
-        self.run = AnimatedSprite('player/Run.png', 8, 1).frames
-        self.jumping = AnimatedSprite('player/Jump.png', 2, 1).frames
-        self.fall = AnimatedSprite('player/Fall.png', 2, 1).frames
+        self.idle = AnimatedSprite('player/Idle.png', 8, 1, 'player').frames
+        self.run = AnimatedSprite('player/Run.png', 8, 1, 'player').frames
+        self.jumping = AnimatedSprite('player/Jump.png', 2, 1, 'player').frames
+        self.fall = AnimatedSprite('player/Fall.png', 2, 1, 'player').frames
         self.cur_frame = 0
         self.image = self.idle[self.cur_frame]
         self.rect = self.image.get_rect(topleft=pos)

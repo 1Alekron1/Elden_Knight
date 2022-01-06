@@ -6,9 +6,7 @@ level_map = [
     '                         ',
 ]
 tile_size = 64
-sizex = len(level_map[0])
-if sizex > 15:
-    sizex = 15
-screen_width = tile_size * sizex
-screeen_height = tile_size * len(level_map) * 2
+vertical_number = 11
+screen_width = 1200
+screeen_height = tile_size * vertical_number
 fps = 60
