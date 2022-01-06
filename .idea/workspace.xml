@@ -4,23 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4cfb5903-c36f-4ae3-9b5f-6b4189d8b6b2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/data/background.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/big_floor.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/big_plat.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/floor.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/penta.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/player/Idle.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/triple.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/vertical.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/game.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/level.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/loading.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/player.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/settings.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sprite_cutter.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tiles.py" afterDir="false" />
+    <list default="true" id="4cfb5903-c36f-4ae3-9b5f-6b4189d8b6b2" name="Changes" comment="Firts steps">
+      <change afterPath="$PROJECT_DIR$/data/background.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/background.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/game.py" beforeDir="false" afterPath="$PROJECT_DIR$/game.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,8 +37,8 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/data/player" />
       <recent name="$PROJECT_DIR$/data" />
+      <recent name="$PROJECT_DIR$/data/player" />
     </key>
   </component>
   <component name="RunManager" selected="Python.game">
@@ -154,6 +143,14 @@
       <option name="presentableId" value="Default" />
       <updated>1641368345659</updated>
     </task>
+    <task id="LOCAL-00001" summary="Firts steps">
+      <created>1641407598390</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1641407598390</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -167,5 +164,9 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Firts steps" />
+    <option name="LAST_COMMIT_MESSAGE" value="Firts steps" />
   </component>
 </project>

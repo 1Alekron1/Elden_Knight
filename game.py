@@ -8,7 +8,7 @@ pygame.init()
 screen = pygame.display.set_mode((screen_width, screeen_height))
 clock = pygame.time.Clock()
 level = Level(level_map, screen)
-background = load_image('background.jpg')
+background = load_image('background.png')
 background = pygame.transform.scale(background, (screen_width, screeen_height))
 
 # Группы спрайтов
@@ -23,6 +23,7 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
         screen.blit(background, (0, 0))
+        # screen.blit(pygame.transform.flip(background, True, False), (screen_width // 2, 0))
         level.run()
         pygame.display.update()
         clock.tick(fps)
