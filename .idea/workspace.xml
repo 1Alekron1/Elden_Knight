@@ -4,21 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4cfb5903-c36f-4ae3-9b5f-6b4189d8b6b2" name="Changes" comment="bug fix">
-      <change afterPath="$PROJECT_DIR$/data/tiles_map/graphics/decorations.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/tiles_map/graphics/fire.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/tiles_map/graphics/terrain.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/tiles_map/graphics/water.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/tiles_map/level_0_terrain.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/game_data.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/importing.py" afterDir="false" />
+    <list default="true" id="4cfb5903-c36f-4ae3-9b5f-6b4189d8b6b2" name="Changes" comment="added map and some animated stuff">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/game.py" beforeDir="false" afterPath="$PROJECT_DIR$/game.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/importing.py" beforeDir="false" afterPath="$PROJECT_DIR$/importing.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/level.py" beforeDir="false" afterPath="$PROJECT_DIR$/level.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/player.py" beforeDir="false" afterPath="$PROJECT_DIR$/player.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprite_cutter.py" beforeDir="false" afterPath="$PROJECT_DIR$/sprite_cutter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tiles.py" beforeDir="false" afterPath="$PROJECT_DIR$/tiles.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +24,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="e557332c084341b0de3e95d482120160cb83fad8" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="23GlXemO1jCmREjBG0eR8thu4NP" />
@@ -144,7 +140,9 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.game" />
+        <item itemvalue="Python.settings" />
         <item itemvalue="Python.level" />
+        <item itemvalue="Python.game" />
         <item itemvalue="Python.settings" />
       </list>
     </recent_temporary>

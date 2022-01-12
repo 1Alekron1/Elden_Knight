@@ -12,7 +12,6 @@ level = Level(level_0, screen)
 
 # Группы спрайтов
 player_group = pygame.sprite.Group()
-tile_group = level.tiles
 
 
 def main():
@@ -23,7 +22,7 @@ def main():
                 running = False
         level.run()
         pygame.display.update()
-        screen.fill('black')
+        screen.fill('grey')
         clock.tick(fps)
     pygame.quit()
 

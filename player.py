@@ -9,7 +9,6 @@ clock = pygame.time.Clock()
 class Player(pygame.sprite.Sprite):
     def __init__(self, pos):
         super().__init__()
-        self.image = load_image('floor.png', -1)
         self.idle = AnimatedSprite('player/Idle.png', 8, 1, 'player').frames
         self.run = AnimatedSprite('player/Run.png', 8, 1, 'player').frames
         self.jumping = AnimatedSprite('player/Jump.png', 2, 1, 'player').frames
@@ -23,7 +22,7 @@ class Player(pygame.sprite.Sprite):
         self.direction = 1
         self.moving = 0
         self.gravity = 0.6
-        self.jump_speed = -16
+        self.jump_speed = -12
         self.jump_counter = 0
         self.counter = 0
         self.mask = pygame.mask.from_surface(self.image)
@@ -69,8 +68,8 @@ class Player(pygame.sprite.Sprite):
         if self.moving == 0:
             self.cur_frame = (self.cur_frame + 0.1) % 8
             if self.direction == 1:
-                self.image = pygame.transform.scale(self.idle[int(self.cur_frame)],
-                                                    (tile_size, tile_size))
+                self.image = self.idle[int(self.cur_frame)]
+
             else:
                 self.image = pygame.transform.flip(
                     pygame.transform.scale(self.idle[int(self.cur_frame)],

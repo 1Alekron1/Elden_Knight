@@ -21,10 +21,10 @@ class Level:
         fire_layout = import_csv_layout(level_data['fire'])
         self.fire_sprites = self.setup(fire_layout, 'fire')
 
-        self.world_shift = -5
+        self.world_shift = 0
 
     def setup(self, layout, type):
-        self.tiles = pygame.sprite.Group()
+        tiles = pygame.sprite.Group()
         self.player = pygame.sprite.GroupSingle(Player((100, 100)))
         for row_ind, row in enumerate(layout):
             for col_ind, col in enumerate(row):
@@ -45,46 +45,48 @@ class Level:
                         sprite = StaticTile((x, y), tile_size, tile_surface)
                     elif type == 'fire':
                         sprite = AnimatedTile((x, y), tile_size, 'fire.png', 10)
-                    self.tiles.add(sprite)
-        return self.tiles
+                    tiles.add(sprite)
+        return tiles
 
-    # def horizontal_mov_collisions(self):
-    #     player = self.player.sprite
-    #     player.rect.x += player.dirx * player.speed
-    #     for sprite in self.tiles.sprites():
-    #         if 0 <= (
-    #                 sprite.rect.right - player.rect.left) <= 8 and player.rect.bottom >= sprite.rect.top:
-    #             player.rect.left = sprite.rect.right
-    #         elif 0 <= (
-    #                 player.rect.right - sprite.rect.left) <= 8 and player.rect.bottom >= sprite.rect.top:
-    #             player.rect.right = sprite.rect.left
-    #
-    # def vertical_mov_collisions(self):
-    #     player = self.player.sprite
-    #     player.apply_gravity()
-    #     for sprite in self.tiles.sprites():
-    #         if pygame.sprite.collide_mask(player, sprite) and player.rect.bottom > sprite.rect.top:
-    #             if player.diry > 0:
-    #                 player.jump_counter = 0
-    #             player.diry = 0
-    #
-    # def scroll_x(self):
-    #     player = self.player.sprite
-    #     player_x = player.rect.centerx
-    #     direction_x = player.dirx
-    #
-    #     if player_x < screen_width // 4 and direction_x < 0:
-    #         self.world_shift = 8
-    #         player.speed = 0
-    #     elif player_x > screen_width - screen_width // 4 and direction_x > 0:
-    #         self.world_shift = -8
-    #         player.speed = 0
-    #     else:
-    #         self.world_shift = 0
-    #         player.speed = 8
+    def horizontal_mov_collisions(self):
+        player = self.player.sprite
+        player.rect.x += player.dirx * player.speed
+        for sprite in self.terrain_sprites.sprites():
+            if pygame.sprite.collide_rect(player, sprite):
+                if player.dirx > 0:
+                    player.rect.right = sprite.rect.left
+                elif player.dirx < 0:
+                    player.rect.left = sprite.rect.right
+
+    def vertical_mov_collisions(self):
+        player = self.player.sprite
+        player.apply_gravity()
+        for sprite in self.terrain_sprites.sprites():
+            if pygame.sprite.collide_rect(player, sprite):
+                if player.diry > 0:
+                    player.jump_counter = 0
+                    player.rect.bottom = sprite.rect.top
+                elif player.diry < 0:
+                    player.rect.top = sprite.rect.bottom
+                player.diry = 0
+
+    def scroll_x(self):
+        player = self.player.sprite
+        player_x = player.rect.centerx
+        direction_x = player.dirx
+
+        if player_x < screen_width // 4 and direction_x < 0:
+            self.world_shift = 8
+            player.speed = 0
+        elif player_x > screen_width - screen_width // 4 and direction_x > 0:
+            self.world_shift = -8
+            player.speed = 0
+        else:
+            self.world_shift = 0
+            player.speed = 8
 
     def run(self):
-        # self.scroll_x()
+        self.scroll_x()
         self.terrain_sprites.update(self.world_shift)
         self.terrain_sprites.draw(self.display)
 
@@ -96,7 +98,7 @@ class Level:
 
         self.fire_sprites.update(self.world_shift)
         self.fire_sprites.draw(self.display)
-        # self.player.update()
-        # self.horizontal_mov_collisions()
-        # self.vertical_mov_collisions()
-        # self.player.draw(self.display)
+        self.player.update()
+        self.horizontal_mov_collisions()
+        self.vertical_mov_collisions()
+        self.player.draw(self.display)

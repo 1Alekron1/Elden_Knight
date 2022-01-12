@@ -22,8 +22,7 @@ def import_image(path):
         for col in range(tile_x):
             y = row * tile_size
             x = col * tile_size
-            new_surf = pygame.Surface((tile_size, tile_size))
-            new_surf.blit(surface, (0, 0), pygame.Rect(x, y, tile_size, tile_size))
+            new_surf = surface.subsurface(x, y, tile_size, tile_size)
             tiles.append(new_surf)
 
     return tiles
