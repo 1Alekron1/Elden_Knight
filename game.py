@@ -22,7 +22,6 @@ def main():
                 running = False
         level.run()
         pygame.display.update()
-        screen.fill('grey')
         clock.tick(fps)
     pygame.quit()
 

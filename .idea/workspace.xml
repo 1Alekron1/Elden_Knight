@@ -4,14 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4cfb5903-c36f-4ae3-9b5f-6b4189d8b6b2" name="Changes" comment="fixed physics">
-      <change afterPath="$PROJECT_DIR$/data/player/idle/adventurer-idle-00.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/player/idle/adventurer-idle-01.png" afterDir="false" />
+    <list default="true" id="4cfb5903-c36f-4ae3-9b5f-6b4189d8b6b2" name="Changes" comment="Solved v_sync bug">
+      <change afterPath="$PROJECT_DIR$/data/tiles_map/BG/background.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/tiles_map/graphics/fireflies.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/importing.py" beforeDir="false" afterPath="$PROJECT_DIR$/importing.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/level.py" beforeDir="false" afterPath="$PROJECT_DIR$/level.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/player.py" beforeDir="false" afterPath="$PROJECT_DIR$/player.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tiles.py" beforeDir="false" afterPath="$PROJECT_DIR$/tiles.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -50,6 +47,7 @@
       <recent name="$PROJECT_DIR$/data/tiles_map" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/data/tiles_map/BG" />
       <recent name="$PROJECT_DIR$/data/player/idle" />
       <recent name="$PROJECT_DIR$/data/tiles_map/graphics" />
       <recent name="$PROJECT_DIR$/data" />
@@ -181,7 +179,14 @@
       <option name="project" value="LOCAL" />
       <updated>1642003698086</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Solved v_sync bug">
+      <created>1642243478364</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1642243478364</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -200,7 +205,8 @@
     <MESSAGE value="Firts steps" />
     <MESSAGE value="bug fix" />
     <MESSAGE value="fixed physics" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed physics" />
+    <MESSAGE value="Solved v_sync bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="Solved v_sync bug" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
