@@ -13,7 +13,7 @@ class Tile(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(topleft=pos)
 
     def update(self, x_shift):
-        self.rect.x += x_shift
+        self.rect.x += int(x_shift * 0.75)
 
 
 class StaticTile(Tile):
@@ -30,8 +30,6 @@ class AnimatedTile(Tile):
         self.cur_frame = 0
 
     def update(self, x_shift):
-        self.rect.x += x_shift
-        self.cur_frame = (self.cur_frame + 0.15) % self.col
+        self.rect.x += int(x_shift * 0.75)
+        self.cur_frame = (self.cur_frame + 0.07) % self.col
         self.image = self.animation[int(self.cur_frame)]
-
-

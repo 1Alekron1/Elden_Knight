@@ -9,6 +9,9 @@ class Level:
     def __init__(self, level_data, surface):
         self.display = surface
 
+        # Player define
+        self.player = pygame.sprite.GroupSingle(Player((100, 100)))
+
         terrain_layout = import_csv_layout(level_data['terrain'])
         self.terrain_sprites = self.setup(terrain_layout, 'terrain')
 
@@ -25,7 +28,7 @@ class Level:
 
     def setup(self, layout, type):
         tiles = pygame.sprite.Group()
-        self.player = pygame.sprite.GroupSingle(Player((100, 100)))
+        sprite = None
         for row_ind, row in enumerate(layout):
             for col_ind, col in enumerate(row):
                 if col != '-1':
@@ -50,7 +53,7 @@ class Level:
 
     def horizontal_mov_collisions(self):
         player = self.player.sprite
-        player.rect.x += player.dirx * player.speed
+        player.rect.x += int(player.dirx * player.speed)
         for sprite in self.terrain_sprites.sprites():
             if pygame.sprite.collide_rect(player, sprite):
                 if player.dirx > 0:
@@ -60,15 +63,25 @@ class Level:
 
     def vertical_mov_collisions(self):
         player = self.player.sprite
-        player.apply_gravity()
+        if not player.is_standing:
+            player.apply_gravity()
+        f = 1
         for sprite in self.terrain_sprites.sprites():
-            if pygame.sprite.collide_rect(player, sprite):
-                if player.diry > 0:
+            if pygame.sprite.collide_rect(player, sprite) or (sprite.rect.top == player.rect.bottom and sprite.rect.left <= player.rect.centerx <= sprite.rect.right):
+                if player.moving_y > 0:
                     player.jump_counter = 0
                     player.rect.bottom = sprite.rect.top
-                elif player.diry < 0:
+                elif player.moving_y < 0:
                     player.rect.top = sprite.rect.bottom
                 player.diry = 0
+                player.moving_y = 0
+                player.is_standing = True
+                f = 0
+                break
+        if f:
+            player.is_standing = False
+
+
 
     def scroll_x(self):
         player = self.player.sprite
@@ -76,14 +89,14 @@ class Level:
         direction_x = player.dirx
 
         if player_x < screen_width // 4 and direction_x < 0:
-            self.world_shift = 8
+            self.world_shift = 4
             player.speed = 0
         elif player_x > screen_width - screen_width // 4 and direction_x > 0:
-            self.world_shift = -8
+            self.world_shift = -4
             player.speed = 0
         else:
             self.world_shift = 0
-            player.speed = 8
+            player.speed = 4
 
     def run(self):
         self.scroll_x()
