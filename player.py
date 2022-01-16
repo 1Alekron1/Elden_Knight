@@ -10,10 +10,13 @@ clock = pygame.time.Clock()
 class Player(pygame.sprite.Sprite):
     def __init__(self, pos):
         super().__init__()
-        self.idle = import_folder('data/player/idle', 1)
-        self.run = import_folder('data/player/run', 1)
-        self.jumping = import_folder('data/player/jump', 1)
-        self.fall = import_folder('data/player/fall', 1)
+        self.initial_cords = pos
+        self.idle = import_folder('data/player/idle', 1.25)
+        self.run = import_folder('data/player/run', 1.25)
+        self.jumping = import_folder('data/player/jump', 1.25)
+        self.fall = import_folder('data/player/fall', 1.25)
+        self.attack1 = import_folder('data/player/attack1', 1.25)
+        self.attack2 = import_folder('data/player/attack2', 1.25)
         self.cur_frame = 0
         self.image = self.idle[self.cur_frame]
         self.rect = self.image.get_rect(topleft=pos)
@@ -28,6 +31,9 @@ class Player(pygame.sprite.Sprite):
         self.is_standing = False
         self.jump_counter = 0
         self.counter = 0
+        self.attacking1 = False
+        self.attacking2 = False
+        self.frame_attack = 0
 
     def get_input(self):
         keys = pygame.key.get_pressed()
@@ -56,6 +62,7 @@ class Player(pygame.sprite.Sprite):
             if self.counter == 1:
                 self.counter = 0
 
+
     def apply_gravity(self):
         self.diry += self.gravity
         if self.diry > 0:
@@ -71,8 +78,28 @@ class Player(pygame.sprite.Sprite):
 
     def update(self):
         self.get_input()
-        if self.moving == 0:
-            self.cur_frame = (self.cur_frame + 0.02) % 2
+        if self.attacking1:
+            self.frame_attack = (self.frame_attack + 0.07)
+            if self.direction == 1:
+                self.image = self.attack1[int(self.frame_attack)]
+            else:
+                self.image = pygame.transform.flip(
+                    self.attack1[int(self.frame_attack)], True, False)
+            if int(self.frame_attack) == 5:
+                self.attacking1 = False
+                self.frame_attack = 0
+        elif self.attacking2:
+            self.frame_attack = (self.frame_attack + 0.07)
+            if self.direction == 1:
+                self.image = self.attack2[int(self.frame_attack)]
+            else:
+                self.image = pygame.transform.flip(
+                    self.attack2[int(self.frame_attack)], True, False)
+            if int(self.frame_attack) == 5:
+                self.attacking2 = False
+                self.frame_attack = 0
+        elif self.moving == 0:
+            self.cur_frame = (self.cur_frame + 0.02) % 8
             if self.direction == 1:
                 self.image = self.idle[int(self.cur_frame)]
 
@@ -80,16 +107,14 @@ class Player(pygame.sprite.Sprite):
                 self.image = pygame.transform.flip(
                     self.idle[int(self.cur_frame)], True, False)
         elif self.moving == 1:
-            self.cur_frame = (self.cur_frame + 0.07) % 6
+            self.cur_frame = (self.cur_frame + 0.07) % 8
             if self.direction == 1:
                 self.image = self.run[int(self.cur_frame)]
             else:
                 self.image = pygame.transform.flip(
                     self.run[int(self.cur_frame)], True, False)
-            self.mask = self.run[int(self.cur_frame)]
-            self.rect = self.mask.get_rect(topleft=self.rect.topleft)
         elif self.moving == 2:
-            self.cur_frame = (self.cur_frame + 0.07) % 4
+            self.cur_frame = (self.cur_frame + 0.07) % 2
             if self.moving_y < 0:
                 if self.direction == 1:
                     self.image = self.jumping[int(self.cur_frame)]
@@ -103,3 +128,5 @@ class Player(pygame.sprite.Sprite):
                     self.image = pygame.transform.flip(
                         self.fall[int(self.cur_frame)], True, False)
 
+    def restart(self):
+        self.rect.topleft = self.initial_cords

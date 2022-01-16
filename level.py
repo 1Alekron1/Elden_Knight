@@ -1,6 +1,6 @@
 import pygame
 from tiles import Tile, StaticTile, AnimatedTile, Background
-from settings import tile_size, screen_width
+from settings import tile_size, screen_width, screeen_height
 from player import Player
 from importing import import_csv_layout, import_image, import_folder
 
@@ -147,3 +147,25 @@ class Level:
         self.horizontal_mov_collisions()
         self.vertical_mov_collisions()
         self.player.draw(self.display)
+        if self.player.sprite.rect.top > screeen_height:
+            return False
+        return True
+
+    def restart(self, level_data, surface):
+        self.player.sprite.restart()
+        for i in self.terrain_sprites.sprites():
+            i.restart()
+        for i in self.background_sprite.sprites():
+            i.restart()
+        for i in self.bush_sprites.sprites():
+            i.restart()
+        for i in self.grass_sprites.sprites():
+            i.restart()
+        for i in self.firefly_sprites.sprites():
+            i.restart()
+        for i in self.fire_sprites.sprites():
+            i.restart()
+        for i in self.decor_sprites.sprites():
+            i.restart()
+        for i in self.chest_sprites.sprites():
+            i.restart()

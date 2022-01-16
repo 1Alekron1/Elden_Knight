@@ -11,9 +11,13 @@ class Tile(pygame.sprite.Sprite):
         super().__init__()
         self.image = pygame.Surface((size, size))
         self.rect = self.image.get_rect(topleft=pos)
+        self.initial_cords = pos
 
     def update(self, x_shift):
         self.rect.x += int(x_shift * 0.75)
+
+    def restart(self):
+        self.rect.topleft = self.initial_cords
 
 
 class StaticTile(Tile):
