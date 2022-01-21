@@ -16,9 +16,6 @@ class Game:
         self.level.run()
 
 
-
-
-
 def main():
     pygame.init()
     screen = pygame.display.set_mode((screen_width, screeen_height))
@@ -27,8 +24,6 @@ def main():
     text_game_over = font.render('You died', True, (255, 0, 0))
     tgox = screen_width // 2 - text_game_over.get_width() // 2
     tgoy = screeen_height // 2 - text_game_over.get_height() // 2
-    # Группы спрайтов
-    player_group = pygame.sprite.Group()
     n = 1
     running = True
     alive = True
@@ -60,6 +55,7 @@ def main():
         pygame.display.update()
         clock.tick(fps)
     pygame.quit()
+
 
 if __name__ == '__main__':
     main()

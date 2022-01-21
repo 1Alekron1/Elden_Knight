@@ -62,7 +62,6 @@ class Player(pygame.sprite.Sprite):
             if self.counter == 1:
                 self.counter = 0
 
-
     def apply_gravity(self):
         self.diry += self.gravity
         if self.diry > 0:

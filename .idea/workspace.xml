@@ -4,57 +4,69 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4cfb5903-c36f-4ae3-9b5f-6b4189d8b6b2" name="Changes" comment="Added decorations and background">
-      <change afterPath="$PROJECT_DIR$/data/player/attack1/image_part_001.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/player/attack1/image_part_002.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/player/attack1/image_part_003.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/player/attack1/image_part_004.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/player/attack1/image_part_005.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/player/attack1/image_part_006.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/player/attack2/image_part_001.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/player/attack2/image_part_002.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/player/attack2/image_part_003.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/player/attack2/image_part_004.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/player/attack2/image_part_005.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/player/attack2/image_part_006.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/player/fall/image_part_001.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/player/fall/image_part_002.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/player/idle/image_part_001.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/player/idle/image_part_002.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/player/idle/image_part_003.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/player/idle/image_part_004.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/player/idle/image_part_005.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/player/idle/image_part_006.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/player/idle/image_part_007.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/player/idle/image_part_008.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/player/jump/image_part_001.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/player/jump/image_part_002.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/player/run/image_part_001.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/player/run/image_part_002.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/player/run/image_part_003.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/player/run/image_part_004.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/player/run/image_part_005.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/player/run/image_part_006.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/player/run/image_part_007.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/player/run/image_part_008.png" afterDir="false" />
+    <list default="true" id="4cfb5903-c36f-4ae3-9b5f-6b4189d8b6b2" name="Changes" comment="Fixed bug with player rect, added attack animation and death screen with the opportunity to revive">
+      <change afterPath="$PROJECT_DIR$/data/enemy/attack1/image_part_047.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/attack1/image_part_048.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/attack1/image_part_049.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/attack1/image_part_050.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/attack1/image_part_051.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/attack1/image_part_052.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/attack1/image_part_053.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/attack1/image_part_054.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/attack1/image_part_055.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/attack1/image_part_056.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/attack1/image_part_057.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/attack1/image_part_058.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/damage/image_part_070.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/damage/image_part_071.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/damage/image_part_072.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/damage/image_part_073.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/damage/image_part_074.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/damage/image_part_093.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/death/image_part_094.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/death/image_part_095.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/death/image_part_096.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/death/image_part_097.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/death/image_part_098.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/death/image_part_099.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/death/image_part_100.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/death/image_part_101.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/death/image_part_102.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/death/image_part_103.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/death/image_part_104.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/death/image_part_105.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/death/image_part_106.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/death/image_part_107.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/death/image_part_108.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/death/image_part_109.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/death/image_part_110.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/death/image_part_111.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/death/image_part_112.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/death/image_part_113.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/death/image_part_114.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/death/image_part_115.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/idle/image_part_001.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/idle/image_part_002.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/idle/image_part_003.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/idle/image_part_004.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/idle/image_part_005.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/idle/image_part_006.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/idle/image_part_007.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/idle/image_part_008.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/idle/image_part_009.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/run/image_part_024.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/run/image_part_025.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/run/image_part_026.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/run/image_part_027.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/run/image_part_028.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/run/image_part_029.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/enemy.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/player/Attack1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/player/Attack2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/player/Death.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/player/Fall.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/player/Idle.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/player/Jump.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/player/Run.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/player/Take Hit - white silhouette.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/player/Take Hit.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/player/idle/adventurer-idle-00.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/player/idle/adventurer-idle-01.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/data/tiles_map/level_0_terrain.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/tiles_map/level_0_terrain.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/game.py" beforeDir="false" afterPath="$PROJECT_DIR$/game.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/importing.py" beforeDir="false" afterPath="$PROJECT_DIR$/importing.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/game_data.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/level.py" beforeDir="false" afterPath="$PROJECT_DIR$/level.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/player.py" beforeDir="false" afterPath="$PROJECT_DIR$/player.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tiles.py" beforeDir="false" afterPath="$PROJECT_DIR$/tiles.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,10 +96,12 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/data/player" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/data/enemy" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/data/enemy" />
       <recent name="$PROJECT_DIR$/data/player" />
       <recent name="$PROJECT_DIR$/data/tiles_map" />
       <recent name="$PROJECT_DIR$/data/tiles_map/graphics" />
@@ -239,7 +253,14 @@
       <option name="project" value="LOCAL" />
       <updated>1642247258911</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Fixed bug with player rect, added attack animation and death screen with the opportunity to revive">
+      <created>1642355042015</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1642355042015</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -260,6 +281,7 @@
     <MESSAGE value="fixed physics" />
     <MESSAGE value="Solved v_sync bug" />
     <MESSAGE value="Added decorations and background" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added decorations and background" />
+    <MESSAGE value="Fixed bug with player rect, added attack animation and death screen with the opportunity to revive" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed bug with player rect, added attack animation and death screen with the opportunity to revive" />
   </component>
 </project>

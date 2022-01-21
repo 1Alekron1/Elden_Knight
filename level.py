@@ -3,6 +3,7 @@ from tiles import Tile, StaticTile, AnimatedTile, Background
 from settings import tile_size, screen_width, screeen_height
 from player import Player
 from importing import import_csv_layout, import_image, import_folder
+from enemy import Enemy
 
 
 class Level:
@@ -11,6 +12,9 @@ class Level:
 
         # Player define
         self.player = pygame.sprite.GroupSingle(Player((100, 100)))
+
+        # Enemy define
+        self.enemy = pygame.sprite.GroupSingle(Enemy(level_data['enemy_pos']))
 
         terrain_layout = import_csv_layout(level_data['terrain'])
         self.terrain_sprites = self.setup(terrain_layout, 'terrain')
@@ -33,7 +37,10 @@ class Level:
         bush_layout = import_csv_layout(level_data['bushes'])
         self.bush_sprites = self.setup(bush_layout, 'bushes')
 
-        self.background_sprite = pygame.sprite.Group(Background((-screen_width // 4, 0), screen_width))
+        self.background_sprite = pygame.sprite.Group(
+            Background((-screen_width // 4, 0), screen_width))
+
+        self.barriers = self.setup(terrain_layout, 'barrier')
 
         self.world_shift = 0
 
@@ -42,35 +49,72 @@ class Level:
         sprite = None
         for row_ind, row in enumerate(layout):
             for col_ind, col in enumerate(row):
-                if col != '-1':
+                if type != 'barrier':
+                    if col != '-1' and col != '-100':
+                        y = row_ind * tile_size
+                        x = col_ind * tile_size
+                        if type == 'terrain':
+                            terrain_tile_list = import_image('data/tiles_map/graphics/terrain.png')
+                            tile_surface = terrain_tile_list[int(col)]
+                            sprite = StaticTile((x, y), tile_size, tile_surface)
+                        elif type == 'grass':
+                            grass_tile_list = import_image('data/tiles_map/graphics/decorations.png')
+                            tile_surface = grass_tile_list[int(col)]
+                            sprite = StaticTile((x, y), tile_size, tile_surface)
+                        elif type == 'fire':
+                            sprite = AnimatedTile((x, y), tile_size, 'fire.png', 10)
+                        elif type == 'firefly':
+                            sprite = AnimatedTile((x, y), tile_size, 'fireflies.png', 10)
+                        elif type == 'decor':
+                            decor_tile_list = import_image('data/tiles_map/graphics/decorations.png')
+                            tile_surface = decor_tile_list[int(col)]
+                            sprite = StaticTile((x, y), tile_size, tile_surface)
+                        elif type == 'chests':
+                            chests_tile_list = import_image(
+                                'data/tiles_map/graphics/decorations.png')
+                            tile_surface = chests_tile_list[int(col)]
+                            sprite = StaticTile((x, y), tile_size, tile_surface)
+                        elif type == 'bushes':
+                            chests_tile_list = import_image(
+                                'data/tiles_map/graphics/decorations.png')
+                            tile_surface = chests_tile_list[int(col)]
+                            sprite = StaticTile((x, y), tile_size, tile_surface)
+
+                        tiles.add(sprite)
+                else:
                     y = row_ind * tile_size
                     x = col_ind * tile_size
-                    if type == 'terrain':
-                        terrain_tile_list = import_image('data/tiles_map/graphics/terrain.png')
-                        tile_surface = terrain_tile_list[int(col)]
-                        sprite = StaticTile((x, y), tile_size, tile_surface)
-                    elif type == 'grass':
-                        grass_tile_list = import_image('data/tiles_map/graphics/decorations.png')
-                        tile_surface = grass_tile_list[int(col)]
-                        sprite = StaticTile((x, y), tile_size, tile_surface)
-                    elif type == 'fire':
-                        sprite = AnimatedTile((x, y), tile_size, 'fire.png', 10)
-                    elif type == 'firefly':
-                        sprite = AnimatedTile((x, y), tile_size, 'fireflies.png', 10)
-                    elif type == 'decor':
-                        decor_tile_list = import_image('data/tiles_map/graphics/decorations.png')
-                        tile_surface = decor_tile_list[int(col)]
-                        sprite = StaticTile((x, y), tile_size, tile_surface)
-                    elif type == 'chests':
-                        chests_tile_list = import_image('data/tiles_map/graphics/decorations.png')
-                        tile_surface = chests_tile_list[int(col)]
-                        sprite = StaticTile((x, y), tile_size, tile_surface)
-                    elif type == 'bushes':
-                        chests_tile_list = import_image('data/tiles_map/graphics/decorations.png')
-                        tile_surface = chests_tile_list[int(col)]
-                        sprite = StaticTile((x, y), tile_size, tile_surface)
-                    tiles.add(sprite)
+                    if col == '-100':
+                        sprite = StaticTile((x, y), tile_size,
+                                            pygame.Surface((tile_size, tile_size), pygame.SRCALPHA,
+                                                           32))
+                        tiles.add(sprite)
         return tiles
+
+    def enemy_trigger(self):
+        enemy = self.enemy.sprite
+        player = self.player.sprite
+        f = 1
+        if 3 < abs(player.rect.centerx - enemy.rect.centerx) <= 350:
+            check = False
+            changed = enemy.direction
+            enemy.moving = 1
+            if player.rect.centerx > enemy.rect.centerx:
+                enemy.direction = 1
+                enemy.dirx = 1
+            else:
+                enemy.direction = -1
+                enemy.dirx = -1
+            for sprite in self.barriers:
+                if tile_size <= abs(enemy.rect.centerx - sprite.rect.centerx) <= tile_size + 7:
+                    check = False
+                    f = 0
+            if f or changed != enemy.direction:
+                check = True
+            if check:
+                enemy.rect.x += int(enemy.dirx * enemy.speed)
+        else:
+            enemy.moving = 0
 
     def horizontal_mov_collisions(self):
         player = self.player.sprite
@@ -81,6 +125,11 @@ class Level:
                     player.rect.right = sprite.rect.left
                 elif player.dirx < 0:
                     player.rect.left = sprite.rect.right
+
+    def touch_check(self):
+        if pygame.sprite.collide_rect(self.player.sprite, self.enemy.sprite):
+            return True
+        return False
 
     def vertical_mov_collisions(self):
         player = self.player.sprite
@@ -124,6 +173,8 @@ class Level:
         self.background_sprite.draw(self.display)
         self.terrain_sprites.update(self.world_shift)
         self.terrain_sprites.draw(self.display)
+        self.barriers.update(self.world_shift)
+        self.barriers.draw(self.display)
 
         self.bush_sprites.update(self.world_shift)
         self.bush_sprites.draw(self.display)
@@ -143,11 +194,14 @@ class Level:
         self.chest_sprites.update(self.world_shift)
         self.chest_sprites.draw(self.display)
 
+        self.enemy.update(self.world_shift)
+        self.enemy.draw(self.display)
+        self.enemy_trigger()
         self.player.update()
         self.horizontal_mov_collisions()
         self.vertical_mov_collisions()
         self.player.draw(self.display)
-        if self.player.sprite.rect.top > screeen_height:
+        if self.player.sprite.rect.top > screeen_height or self.touch_check():
             return False
         return True
 
@@ -168,4 +222,8 @@ class Level:
         for i in self.decor_sprites.sprites():
             i.restart()
         for i in self.chest_sprites.sprites():
+            i.restart()
+        for i in self.enemy.sprites():
+            i.restart()
+        for i in self.barriers:
             i.restart()
