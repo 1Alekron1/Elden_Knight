@@ -4,69 +4,107 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4cfb5903-c36f-4ae3-9b5f-6b4189d8b6b2" name="Changes" comment="Fixed bug with player rect, added attack animation and death screen with the opportunity to revive">
-      <change afterPath="$PROJECT_DIR$/data/enemy/attack1/image_part_047.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/enemy/attack1/image_part_048.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/enemy/attack1/image_part_049.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/enemy/attack1/image_part_050.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/enemy/attack1/image_part_051.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/enemy/attack1/image_part_052.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/enemy/attack1/image_part_053.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/enemy/attack1/image_part_054.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/enemy/attack1/image_part_055.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/enemy/attack1/image_part_056.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/enemy/attack1/image_part_057.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/enemy/attack1/image_part_058.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/enemy/damage/image_part_070.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/enemy/damage/image_part_071.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/enemy/damage/image_part_072.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/enemy/damage/image_part_073.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/enemy/damage/image_part_074.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/enemy/damage/image_part_093.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/enemy/death/image_part_094.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/enemy/death/image_part_095.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/enemy/death/image_part_096.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/enemy/death/image_part_097.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/enemy/death/image_part_098.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/enemy/death/image_part_099.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/enemy/death/image_part_100.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/enemy/death/image_part_101.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/enemy/death/image_part_102.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/enemy/death/image_part_103.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/enemy/death/image_part_104.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/enemy/death/image_part_105.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/enemy/death/image_part_106.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/enemy/death/image_part_107.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/enemy/death/image_part_108.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/enemy/death/image_part_109.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/enemy/death/image_part_110.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/enemy/death/image_part_111.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/enemy/death/image_part_112.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/enemy/death/image_part_113.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/enemy/death/image_part_114.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/enemy/death/image_part_115.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/enemy/idle/image_part_001.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/enemy/idle/image_part_002.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/enemy/idle/image_part_003.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/enemy/idle/image_part_004.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/enemy/idle/image_part_005.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/enemy/idle/image_part_006.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/enemy/idle/image_part_007.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/enemy/idle/image_part_008.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/enemy/idle/image_part_009.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/enemy/run/image_part_024.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/enemy/run/image_part_025.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/enemy/run/image_part_026.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/enemy/run/image_part_027.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/enemy/run/image_part_028.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/enemy/run/image_part_029.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/enemy.py" afterDir="false" />
+    <list default="true" id="4cfb5903-c36f-4ae3-9b5f-6b4189d8b6b2" name="Changes" comment="Added first enemy that follows and kills player">
+      <change afterPath="$PROJECT_DIR$/data/enemy/attack1/image_part_001.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/attack1/image_part_002.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/attack1/image_part_003.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/attack1/image_part_004.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/attack1/image_part_005.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/attack1/image_part_006.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/attack1/image_part_007.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/attack1/image_part_008.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/damage/image_part_001.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/damage/image_part_002.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/damage/image_part_003.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/death/image_part_001.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/death/image_part_002.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/death/image_part_003.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/death/image_part_004.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/death/image_part_006.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/idle/image_part_010.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/run/image_part_001.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/run/image_part_002.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/run/image_part_003.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/run/image_part_004.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/run/image_part_005.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/run/image_part_006.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/run/image_part_007.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/enemy/run/image_part_008.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/player/damage/image_part_001.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/player/damage/image_part_002.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/player/damage/image_part_003.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/player/damage/image_part_004.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/player/heath_bar.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/background.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/big_floor.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/big_plat.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/enemy/attack1/image_part_047.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/enemy/attack1/image_part_048.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/enemy/attack1/image_part_049.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/enemy/attack1/image_part_050.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/enemy/attack1/image_part_051.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/enemy/attack1/image_part_052.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/enemy/attack1/image_part_053.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/enemy/attack1/image_part_054.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/enemy/attack1/image_part_055.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/enemy/attack1/image_part_056.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/enemy/attack1/image_part_057.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/enemy/attack1/image_part_058.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/enemy/damage/image_part_070.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/enemy/damage/image_part_071.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/enemy/damage/image_part_072.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/enemy/damage/image_part_073.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/enemy/damage/image_part_074.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/enemy/damage/image_part_093.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/enemy/death/image_part_094.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/enemy/death/image_part_095.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/enemy/death/image_part_096.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/enemy/death/image_part_097.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/enemy/death/image_part_098.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/enemy/death/image_part_099.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/enemy/death/image_part_100.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/enemy/death/image_part_101.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/enemy/death/image_part_102.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/enemy/death/image_part_103.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/enemy/death/image_part_104.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/enemy/death/image_part_105.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/enemy/death/image_part_106.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/enemy/death/image_part_107.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/enemy/death/image_part_108.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/enemy/death/image_part_109.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/enemy/death/image_part_110.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/enemy/death/image_part_111.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/enemy/death/image_part_112.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/enemy/death/image_part_005.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/enemy/death/image_part_113.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/enemy/death/image_part_007.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/enemy/death/image_part_114.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/enemy/death/image_part_115.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/enemy/idle/image_part_001.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/enemy/idle/image_part_001.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/enemy/idle/image_part_002.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/enemy/idle/image_part_002.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/enemy/idle/image_part_003.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/enemy/idle/image_part_003.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/enemy/idle/image_part_004.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/enemy/idle/image_part_004.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/enemy/idle/image_part_005.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/enemy/idle/image_part_005.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/enemy/idle/image_part_006.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/enemy/idle/image_part_006.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/enemy/idle/image_part_007.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/enemy/idle/image_part_007.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/enemy/idle/image_part_008.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/enemy/idle/image_part_008.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/enemy/idle/image_part_009.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/enemy/idle/image_part_009.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/enemy/run/image_part_024.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/enemy/run/image_part_025.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/enemy/run/image_part_026.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/enemy/run/image_part_027.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/enemy/run/image_part_028.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/enemy/run/image_part_029.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/floor.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/penta.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/data/tiles_map/level_0_terrain.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/tiles_map/level_0_terrain.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/game.py" beforeDir="false" afterPath="$PROJECT_DIR$/game.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/triple.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/vertical.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/enemy.py" beforeDir="false" afterPath="$PROJECT_DIR$/enemy.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/game_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/game_data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/importing.py" beforeDir="false" afterPath="$PROJECT_DIR$/importing.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/level.py" beforeDir="false" afterPath="$PROJECT_DIR$/level.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/player.py" beforeDir="false" afterPath="$PROJECT_DIR$/player.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiles.py" beforeDir="false" afterPath="$PROJECT_DIR$/tiles.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,11 +145,11 @@
       <recent name="$PROJECT_DIR$/data/tiles_map/graphics" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/data/player/damage" />
+      <recent name="$PROJECT_DIR$/data/player" />
       <recent name="$PROJECT_DIR$/data/player/attack" />
       <recent name="$PROJECT_DIR$/data/tiles_map/BG" />
       <recent name="$PROJECT_DIR$/data/player/idle" />
-      <recent name="$PROJECT_DIR$/data/tiles_map/graphics" />
-      <recent name="$PROJECT_DIR$/data" />
     </key>
   </component>
   <component name="RunManager" selected="Python.game">
@@ -260,7 +298,14 @@
       <option name="project" value="LOCAL" />
       <updated>1642355042015</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Added first enemy that follows and kills player">
+      <created>1642785691290</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1642785691290</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -282,6 +327,7 @@
     <MESSAGE value="Solved v_sync bug" />
     <MESSAGE value="Added decorations and background" />
     <MESSAGE value="Fixed bug with player rect, added attack animation and death screen with the opportunity to revive" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed bug with player rect, added attack animation and death screen with the opportunity to revive" />
+    <MESSAGE value="Added first enemy that follows and kills player" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added first enemy that follows and kills player" />
   </component>
 </project>

@@ -47,3 +47,14 @@ class Background(Tile):
 
     def update(self, x_shift):
         self.rect.x += int(x_shift * 0.25)
+
+
+class HealthBar(Tile):
+    def __init__(self, pos, size):
+        super().__init__(pos, size)
+        self.image = pygame.image.load('data/player/heath_bar.png')
+        self.rect = self.image.get_rect(topleft=pos)
+        self.pos = pos
+
+    def update(self, surface, health):
+        pygame.draw.rect(surface, (255, 0, 0), (self.pos[0] + 11, self.pos[1] + 5, (self.image.get_width() - 14) * health, self.image.get_height() - 10))

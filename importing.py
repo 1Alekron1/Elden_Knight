@@ -33,10 +33,11 @@ def import_folder(path, k):
     surface_list = []
     for _, _, files in walk(path):
         for image in files:
-            full_path = path + '/' + image
-            im = pygame.image.load(full_path).convert_alpha()
-            x, y = im.get_size()
-            coeff = x / y
-            image_suf = pygame.transform.scale(im, (int(tile_size * k * coeff), int(tile_size * k)))
-            surface_list.append(image_suf)
+            if image != '.DS_Store':
+                full_path = path + '/' + image
+                im = pygame.image.load(full_path).convert_alpha()
+                x, y = im.get_size()
+                coeff = x / y
+                image_suf = pygame.transform.scale(im, (int(tile_size * k * coeff), int(tile_size * k)))
+                surface_list.append(image_suf)
     return surface_list

@@ -17,9 +17,10 @@ class Player(pygame.sprite.Sprite):
         self.fall = import_folder('data/player/fall', 1.25)
         self.attack1 = import_folder('data/player/attack1', 1.25)
         self.attack2 = import_folder('data/player/attack2', 1.25)
+        self.damage = import_folder('data/player/damage', 1.25)
         self.cur_frame = 0
         self.image = self.idle[self.cur_frame]
-        self.rect = self.image.get_rect(topleft=pos)
+        self.rect = self.image.get_rect(center=pos)
         self.dirx = 0
         self.diry = 0
         self.speed = 3
@@ -34,6 +35,10 @@ class Player(pygame.sprite.Sprite):
         self.attacking1 = False
         self.attacking2 = False
         self.frame_attack = 0
+        self.health = 1
+        self.get_damage = False
+        self.mask = pygame.mask.from_surface(self.image)
+        self.is_resistant = 200
 
     def get_input(self):
         keys = pygame.key.get_pressed()
@@ -77,7 +82,18 @@ class Player(pygame.sprite.Sprite):
 
     def update(self):
         self.get_input()
-        if self.attacking1:
+        if 0 <= self.is_resistant < 200:
+            self.is_resistant += 1
+        if self.get_damage:
+            self.cur_frame = (self.cur_frame + 0.05)
+            if self.direction == 1:
+                self.image = self.damage[int(self.cur_frame)]
+            else:
+                self.image = pygame.transform.flip(
+                    self.damage[int(self.cur_frame)], True, False)
+            if 4 - self.cur_frame <= 0.3:
+                self.get_damage = False
+        elif self.attacking1:
             self.frame_attack = (self.frame_attack + 0.07)
             if self.direction == 1:
                 self.image = self.attack1[int(self.frame_attack)]
@@ -126,6 +142,11 @@ class Player(pygame.sprite.Sprite):
                 else:
                     self.image = pygame.transform.flip(
                         self.fall[int(self.cur_frame)], True, False)
+        self.mask = pygame.mask.from_surface(self.image)
 
     def restart(self):
         self.rect.topleft = self.initial_cords
+        self.health = 1
+        self.moving = 0
+        self.get_damage = False
+        self.attacking1 = False

@@ -1,9 +1,11 @@
 import pygame
-from tiles import Tile, StaticTile, AnimatedTile, Background
+from tiles import StaticTile, AnimatedTile, Background, HealthBar
 from settings import tile_size, screen_width, screeen_height
 from player import Player
-from importing import import_csv_layout, import_image, import_folder
+from importing import import_csv_layout, import_image
 from enemy import Enemy
+
+clock1 = pygame.time.Clock()
 
 
 class Level:
@@ -14,7 +16,8 @@ class Level:
         self.player = pygame.sprite.GroupSingle(Player((100, 100)))
 
         # Enemy define
-        self.enemy = pygame.sprite.GroupSingle(Enemy(level_data['enemy_pos']))
+        self.enemy = pygame.sprite.Group(Enemy(level_data['enemy_pos'][0]),
+                                         Enemy(level_data['enemy_pos'][1]))
 
         terrain_layout = import_csv_layout(level_data['terrain'])
         self.terrain_sprites = self.setup(terrain_layout, 'terrain')
@@ -40,41 +43,44 @@ class Level:
         self.background_sprite = pygame.sprite.Group(
             Background((-screen_width // 4, 0), screen_width))
 
+        self.health_bar_sprite = pygame.sprite.Group(
+            HealthBar((30, 30), screen_width))
+
         self.barriers = self.setup(terrain_layout, 'barrier')
 
         self.world_shift = 0
 
-    def setup(self, layout, type):
+    def setup(self, layout, type_t):
         tiles = pygame.sprite.Group()
         sprite = None
         for row_ind, row in enumerate(layout):
             for col_ind, col in enumerate(row):
-                if type != 'barrier':
+                if type_t != 'barrier':
                     if col != '-1' and col != '-100':
                         y = row_ind * tile_size
                         x = col_ind * tile_size
-                        if type == 'terrain':
+                        if type_t == 'terrain':
                             terrain_tile_list = import_image('data/tiles_map/graphics/terrain.png')
                             tile_surface = terrain_tile_list[int(col)]
                             sprite = StaticTile((x, y), tile_size, tile_surface)
-                        elif type == 'grass':
+                        elif type_t == 'grass':
                             grass_tile_list = import_image('data/tiles_map/graphics/decorations.png')
                             tile_surface = grass_tile_list[int(col)]
                             sprite = StaticTile((x, y), tile_size, tile_surface)
-                        elif type == 'fire':
+                        elif type_t == 'fire':
                             sprite = AnimatedTile((x, y), tile_size, 'fire.png', 10)
-                        elif type == 'firefly':
+                        elif type_t == 'firefly':
                             sprite = AnimatedTile((x, y), tile_size, 'fireflies.png', 10)
-                        elif type == 'decor':
+                        elif type_t == 'decor':
                             decor_tile_list = import_image('data/tiles_map/graphics/decorations.png')
                             tile_surface = decor_tile_list[int(col)]
                             sprite = StaticTile((x, y), tile_size, tile_surface)
-                        elif type == 'chests':
+                        elif type_t == 'chests':
                             chests_tile_list = import_image(
                                 'data/tiles_map/graphics/decorations.png')
                             tile_surface = chests_tile_list[int(col)]
                             sprite = StaticTile((x, y), tile_size, tile_surface)
-                        elif type == 'bushes':
+                        elif type_t == 'bushes':
                             chests_tile_list = import_image(
                                 'data/tiles_map/graphics/decorations.png')
                             tile_surface = chests_tile_list[int(col)]
@@ -92,29 +98,35 @@ class Level:
         return tiles
 
     def enemy_trigger(self):
-        enemy = self.enemy.sprite
         player = self.player.sprite
-        f = 1
-        if 3 < abs(player.rect.centerx - enemy.rect.centerx) <= 350:
-            check = False
-            changed = enemy.direction
-            enemy.moving = 1
-            if player.rect.centerx > enemy.rect.centerx:
-                enemy.direction = 1
-                enemy.dirx = 1
-            else:
-                enemy.direction = -1
-                enemy.dirx = -1
-            for sprite in self.barriers:
-                if tile_size <= abs(enemy.rect.centerx - sprite.rect.centerx) <= tile_size + 7:
-                    check = False
-                    f = 0
-            if f or changed != enemy.direction:
-                check = True
-            if check:
-                enemy.rect.x += int(enemy.dirx * enemy.speed)
-        else:
-            enemy.moving = 0
+        for enemy in self.enemy.sprites():
+            f = 1
+            if 130 < abs(
+                    player.rect.centerx - enemy.rect.centerx) <= 400 and not enemy.attacking1 and \
+                    enemy.alive:
+                check = False
+                changed = enemy.direction
+                enemy.moving = 1
+                if player.rect.centerx > enemy.rect.centerx:
+                    enemy.direction = 1
+                    enemy.dirx = 1
+                else:
+                    enemy.direction = -1
+                    enemy.dirx = -1
+                for sprite in self.barriers:
+                    if tile_size <= abs(enemy.rect.centerx - sprite.rect.centerx) <= tile_size + 7:
+                        check = False
+                        f = 0
+                if f or changed != enemy.direction:
+                    check = True
+                if check:
+                    enemy.rect.x += int(enemy.dirx * enemy.speed)
+            elif abs(
+                    player.rect.centerx - enemy.rect.centerx) <= 130 and enemy.ready == 200 and \
+                    enemy.alive:
+                enemy.attacking1 = True
+            elif enemy.alive:
+                enemy.moving = 0
 
     def horizontal_mov_collisions(self):
         player = self.player.sprite
@@ -126,10 +138,28 @@ class Level:
                 elif player.dirx < 0:
                     player.rect.left = sprite.rect.right
 
-    def touch_check(self):
-        if pygame.sprite.collide_rect(self.player.sprite, self.enemy.sprite):
-            return True
-        return False
+    def get_damage(self):
+        player = self.player.sprite
+        for enemy in self.enemy.sprites():
+            if pygame.sprite.collide_mask(player,
+                                          enemy) and player.is_resistant == 200 and \
+                    enemy.alive and enemy.attacking1 and enemy.direction != player.direction and \
+                    int(enemy.frame_attack) in [3, 4, 5, 9, 8, 10, 17, 19, 18]:
+                player.health -= 0.25
+                player.is_resistant = 0
+                player.get_damage = True
+                player.cur_frame = 0
+
+    def hurt(self):
+        player = self.player.sprite
+        for enemy in self.enemy.sprites():
+            if pygame.sprite.collide_mask(player, enemy) and player.attacking1 and \
+                    player.alive and enemy.is_resistant == 100 and enemy.alive:
+                enemy.health -= 0.25
+                print(enemy.health)
+                enemy.is_resistant = 0
+                enemy.cur_frame = 0
+                enemy.attacking1 = False
 
     def vertical_mov_collisions(self):
         player = self.player.sprite
@@ -138,7 +168,8 @@ class Level:
         f = 1
         for sprite in self.terrain_sprites.sprites():
             if pygame.sprite.collide_rect(player, sprite) or (
-                    sprite.rect.top == player.rect.bottom and sprite.rect.left <= player.rect.centerx <= sprite.rect.right):
+                    sprite.rect.top == player.rect.bottom and
+                    sprite.rect.left <= player.rect.centerx <= sprite.rect.right):
                 if player.moving_y > 0:
                     player.jump_counter = 0
                     player.rect.bottom = sprite.rect.top
@@ -171,6 +202,8 @@ class Level:
         self.scroll_x()
         self.background_sprite.update(self.world_shift)
         self.background_sprite.draw(self.display)
+        self.health_bar_sprite.update(self.display, self.player.sprite.health)
+        self.health_bar_sprite.draw(self.display)
         self.terrain_sprites.update(self.world_shift)
         self.terrain_sprites.draw(self.display)
         self.barriers.update(self.world_shift)
@@ -193,7 +226,6 @@ class Level:
 
         self.chest_sprites.update(self.world_shift)
         self.chest_sprites.draw(self.display)
-
         self.enemy.update(self.world_shift)
         self.enemy.draw(self.display)
         self.enemy_trigger()
@@ -201,7 +233,9 @@ class Level:
         self.horizontal_mov_collisions()
         self.vertical_mov_collisions()
         self.player.draw(self.display)
-        if self.player.sprite.rect.top > screeen_height or self.touch_check():
+        self.hurt()
+        self.get_damage()
+        if self.player.sprite.rect.top > screeen_height or self.player.sprite.health == 0:
             return False
         return True
 
