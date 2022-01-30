@@ -1,5 +1,5 @@
 import pygame
-from tiles import StaticTile, AnimatedTile, Background, HealthBar
+from tiles import StaticTile, AnimatedTile, Background, HealthBar, MoneyBar
 from settings import tile_size, screen_width, screeen_height
 from player import Player
 from importing import import_csv_layout, import_image
@@ -43,8 +43,10 @@ class Level:
         self.background_sprite = pygame.sprite.Group(
             Background((-screen_width // 4, 0), screen_width))
 
-        self.health_bar_sprite = pygame.sprite.Group(
-            HealthBar((30, 30), screen_width))
+        self.health_bar_sprite = pygame.sprite.Group(HealthBar((30, 30)))
+
+        self.money_bar_sprite = pygame.sprite.Group(
+            MoneyBar((screen_width - 140, screeen_height - 60)))
 
         self.barriers = self.setup(terrain_layout, 'barrier')
 
@@ -103,7 +105,7 @@ class Level:
             f = 1
             if 130 < abs(
                     player.rect.centerx - enemy.rect.centerx) <= 400 and not enemy.attacking1 and \
-                    enemy.alive:
+                    enemy.alivec and enemy.health > 0:
                 check = False
                 changed = enemy.direction
                 enemy.moving = 1
@@ -123,9 +125,9 @@ class Level:
                     enemy.rect.x += int(enemy.dirx * enemy.speed)
             elif abs(
                     player.rect.centerx - enemy.rect.centerx) <= 130 and enemy.ready == 200 and \
-                    enemy.alive:
+                    enemy.alivec and enemy.health > 0:
                 enemy.attacking1 = True
-            elif enemy.alive:
+            elif enemy.alivec and enemy.health > 0:
                 enemy.moving = 0
 
     def horizontal_mov_collisions(self):
@@ -143,8 +145,8 @@ class Level:
         for enemy in self.enemy.sprites():
             if pygame.sprite.collide_mask(player,
                                           enemy) and player.is_resistant == 200 and \
-                    enemy.alive and enemy.attacking1 and enemy.direction != player.direction and \
-                    int(enemy.frame_attack) in [3, 4, 5, 9, 8, 10, 17, 19, 18]:
+                    enemy.alivec and enemy.attacking1 and enemy.direction != player.direction and \
+                    int(enemy.frame_attack) in [3, 4, 5, 9, 8, 10, 17, 19, 18] and enemy.health > 0:
                 player.health -= 0.25
                 player.is_resistant = 0
                 player.get_damage = True
@@ -154,12 +156,14 @@ class Level:
         player = self.player.sprite
         for enemy in self.enemy.sprites():
             if pygame.sprite.collide_mask(player, enemy) and player.attacking1 and \
-                    player.alive and enemy.is_resistant == 100 and enemy.alive:
+                    player.alive and enemy.is_resistant == 100 and enemy.alivec and enemy.health > 0:
                 enemy.health -= 0.25
                 print(enemy.health)
                 enemy.is_resistant = 0
                 enemy.cur_frame = 0
                 enemy.attacking1 = False
+                if enemy.health == 0:
+                    player.change += 100
 
     def vertical_mov_collisions(self):
         player = self.player.sprite
@@ -230,6 +234,8 @@ class Level:
         self.enemy.draw(self.display)
         self.enemy_trigger()
         self.player.update()
+        self.money_bar_sprite.draw(self.display)
+        self.money_bar_sprite.update(self.display, self.player.sprite.money)
         self.horizontal_mov_collisions()
         self.vertical_mov_collisions()
         self.player.draw(self.display)
@@ -261,3 +267,5 @@ class Level:
             i.restart()
         for i in self.barriers:
             i.restart()
+        self.enemy = pygame.sprite.Group(Enemy(level_data['enemy_pos'][0]),
+                                         Enemy(level_data['enemy_pos'][1]))
