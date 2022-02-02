@@ -2,4 +2,4 @@
 
 Yandex Lyceum pygame project
 
-PS I hate working with raw sprites
+P.S. I hate working with raw sprites
