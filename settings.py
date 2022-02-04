@@ -5,4 +5,3 @@ screeen_height = tile_size * vertical_number
 fps = 180
 menu_width = 700
 menu_height = 700
-

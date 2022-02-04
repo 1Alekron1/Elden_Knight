@@ -2,6 +2,7 @@ import pygame
 from importing import import_folder
 from Character import Character
 
+
 class Enemy(Character):
     def __init__(self, pos):
         super().__init__(pos)

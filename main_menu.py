@@ -1,6 +1,6 @@
 import pygame
-from game import main
-from settings import menu_width, menu_height
+from level_selection import selection
+from settings import *
 
 
 def menu():
@@ -24,7 +24,7 @@ def menu():
                 y = event.pos[1]
                 if 225 <= x <= 475 and 280 <= y <= 377:
                     screen.blit(background, (0,0))
-                    main()
+                    selection()
                 elif 225 <= x <= 475 and 580 <= y <= 677:
                     running = False
         screen.blit(background, (0, 0))

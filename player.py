@@ -1,7 +1,4 @@
 import pygame
-from loading import load_image
-from sprite_cutter import AnimatedSprite
-from settings import tile_size
 from importing import import_folder
 from Character import Character
 
@@ -30,9 +27,9 @@ class Player(Character):
         self.get_damage = False
         self.mask = pygame.mask.from_surface(self.image)
         self.is_resistant = 200
-        self.money = open('data/player/money.txt').read().strip()
+        self.money = open('data/player/save/money.txt').read().strip()
         self.change = 0
-
+        self.kills = 0
 
     def get_input(self):
         keys = pygame.key.get_pressed()
@@ -76,9 +73,9 @@ class Player(Character):
 
     def update(self):
         if self.change:
-            with open('data/player/money.txt', 'w') as f:
+            with open('data/player/save/money.txt', 'w') as f:
                 f.write(str(int(self.money) + self.change))
-            self.money = open('data/player/money.txt').read().strip()
+            self.money = open('data/player/save/money.txt').read().strip()
             self.change = 0
         self.get_input()
         if 0 <= self.is_resistant < 200:
@@ -149,3 +146,4 @@ class Player(Character):
         self.moving = 0
         self.get_damage = False
         self.attacking1 = False
+        self.kills = 0

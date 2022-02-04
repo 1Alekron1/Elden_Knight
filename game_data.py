@@ -1,4 +1,4 @@
-level_0 = {
+level_1 = {
     'terrain': 'data/tiles_map/level_0_terrain.csv',
     'water': 'data/tiles_map/level_0_water.csv',
     'grass': 'data/tiles_map/level_0_grass.csv',

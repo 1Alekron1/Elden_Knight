@@ -1,5 +1,4 @@
 import pygame
-from loading import load_image
 from sprite_cutter import AnimatedSprite
 
 patterns = {'floor': 'floor.png', 'big_floor': 'big_floor.png', 'vertical': 'vertical.png',
@@ -57,7 +56,9 @@ class HealthBar(pygame.sprite.Sprite):
         self.pos = pos
 
     def update(self, surface, health):
-        pygame.draw.rect(surface, (255, 0, 0), (self.pos[0] + 11, self.pos[1] + 5, (self.image.get_width() - 14) * health, self.image.get_height() - 10))
+        pygame.draw.rect(surface, (255, 0, 0), (
+        self.pos[0] + 11, self.pos[1] + 5, (self.image.get_width() - 14) * health,
+        self.image.get_height() - 10))
 
 
 class MoneyBar(pygame.sprite.Sprite):
@@ -72,3 +73,11 @@ class MoneyBar(pygame.sprite.Sprite):
     def update(self, surface, money):
         self.text = self.font.render(money, True, (255, 255, 255))
         surface.blit(self.text, (self.pos[0] + 10, self.pos[1] + 10))
+
+
+class ReturnButton(pygame.sprite.Sprite):
+    def __init__(self, pos):
+        super().__init__()
+        self.image = pygame.image.load('data/menu/Home.png').convert_alpha()
+        self.rect = self.image.get_rect(topleft=pos)
+        self.pos = pos

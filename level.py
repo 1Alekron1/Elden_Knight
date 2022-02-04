@@ -1,5 +1,5 @@
 import pygame
-from tiles import StaticTile, AnimatedTile, Background, HealthBar, MoneyBar
+from tiles import StaticTile, AnimatedTile, Background, HealthBar, MoneyBar, ReturnButton
 from settings import tile_size, screen_width, screeen_height
 from player import Player
 from importing import import_csv_layout, import_image
@@ -48,17 +48,23 @@ class Level:
         self.money_bar_sprite = pygame.sprite.Group(
             MoneyBar((screen_width - 140, screeen_height - 60)))
 
+        self.return_sprite = pygame.sprite.GroupSingle(
+            ReturnButton((30, screeen_height - 70)))
+
         self.barriers = self.setup(terrain_layout, 'barrier')
 
+        self.finish = self.setup(terrain_layout, 'finish')
+
         self.world_shift = 0
+        self.count_star = len(self.enemy.sprites())
 
     def setup(self, layout, type_t):
         tiles = pygame.sprite.Group()
         sprite = None
         for row_ind, row in enumerate(layout):
             for col_ind, col in enumerate(row):
-                if type_t != 'barrier':
-                    if col != '-1' and col != '-100':
+                if type_t != 'barrier' and type_t != 'finish':
+                    if col != '-1' and col != '-100' and col != '-1000':
                         y = row_ind * tile_size
                         x = col_ind * tile_size
                         if type_t == 'terrain':
@@ -89,10 +95,18 @@ class Level:
                             sprite = StaticTile((x, y), tile_size, tile_surface)
 
                         tiles.add(sprite)
-                else:
+                elif type_t == 'barrier':
                     y = row_ind * tile_size
                     x = col_ind * tile_size
                     if col == '-100':
+                        sprite = StaticTile((x, y), tile_size,
+                                            pygame.Surface((tile_size, tile_size), pygame.SRCALPHA,
+                                                           32))
+                        tiles.add(sprite)
+                else:
+                    y = row_ind * tile_size
+                    x = col_ind * tile_size
+                    if col == '-1000':
                         sprite = StaticTile((x, y), tile_size,
                                             pygame.Surface((tile_size, tile_size), pygame.SRCALPHA,
                                                            32))
@@ -164,6 +178,7 @@ class Level:
                 enemy.attacking1 = False
                 if enemy.health == 0:
                     player.change += 100
+                    player.kills += 1
 
     def vertical_mov_collisions(self):
         player = self.player.sprite
@@ -202,6 +217,10 @@ class Level:
             self.world_shift = 0
             player.speed = 4
 
+    def collide_check(self, pos):
+        if self.return_sprite.sprite.rect.collidepoint(pos):
+            return True
+
     def run(self):
         self.scroll_x()
         self.background_sprite.update(self.world_shift)
@@ -236,16 +255,22 @@ class Level:
         self.player.update()
         self.money_bar_sprite.draw(self.display)
         self.money_bar_sprite.update(self.display, self.player.sprite.money)
+        self.return_sprite.draw(self.display)
         self.horizontal_mov_collisions()
         self.vertical_mov_collisions()
         self.player.draw(self.display)
         self.hurt()
         self.get_damage()
+        self.finish.update(self.world_shift)
+        self.finish.draw(self.display)
+        for sprite in self.finish.sprites():
+            if sprite.rect.colliderect(self.player.sprite.rect):
+                return self.player.sprite.kills / self.count_star
         if self.player.sprite.rect.top > screeen_height or self.player.sprite.health == 0:
-            return False
+            return 'False'
         return True
 
-    def restart(self, level_data, surface):
+    def restart(self, level_data):
         self.player.sprite.restart()
         for i in self.terrain_sprites.sprites():
             i.restart()
@@ -266,6 +291,8 @@ class Level:
         for i in self.enemy.sprites():
             i.restart()
         for i in self.barriers:
+            i.restart()
+        for i in self.finish:
             i.restart()
         self.enemy = pygame.sprite.Group(Enemy(level_data['enemy_pos'][0]),
                                          Enemy(level_data['enemy_pos'][1]))

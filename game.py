@@ -1,17 +1,20 @@
-import pygame
 from settings import *
 from loading import *
 from level import Level
-from game_data import level_0
+from game_data import *
+from results import results
+
+levels = {'level1': level_1}
 
 
-def main():
+def main(typ):
     class Game:
-        def __init__(self, level, screen):
-            self.create_level(level, screen)
+        def __init__(self, level, screenn):
+            self.create_level(level, screenn)
+            self.current_level = level
 
-        def create_level(self, level, screen):
-            self.level = Level(level, screen)
+        def create_level(self, level, screenn):
+            self.level = Level(level, screenn)
 
         def run(self):
             self.level.run()
@@ -32,14 +35,26 @@ def main():
     screen.blit(background, (0, 0))
     screen.blit(text_loading, (screen_width - 185, screeen_height - 60))
     pygame.display.update()
-    game = Game(level_0, screen)
+    game = Game(levels[typ], screen)
     counter_death_screen = 0
     while running:
-        if alive:
+        if alive != 'False':
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
+                    pygame.quit()
+                if str(int(abs(alive))).isdigit() and alive is not True:
+                    game.level.restart(game.current_level)
+                    m = results(alive)
+                    alive = True
+                    if m:
+                        return 'Completed'
                 if event.type == pygame.MOUSEBUTTONDOWN:
+                    if game.level.collide_check(event.pos):
+                        screen.blit(background, (0, 0))
+                        pygame.display.update()
+                        game.level.restart(game.current_level)
+                        return 'Home'
                     if n:
                         game.level.player.sprite.attacking1 = False
                         game.level.player.sprite.attacking2 = True
@@ -55,12 +70,6 @@ def main():
             counter_death_screen += 1
             if counter_death_screen > 200:
                 alive = True
-                game.level.restart(level_0, screen)
+                game.level.restart(game.current_level)
                 counter_death_screen = 0
         pygame.display.update()
-        clock.tick(fps)
-    pygame.quit()
-
-
-if __name__ == '__main__':
-    main()
