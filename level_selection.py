@@ -45,6 +45,7 @@ def selection():
                 for i in level_buttons.sprites():
                     if i.rect.collidepoint(event.pos):
                         main(i.typ)
+                        screen = pygame.display.set_mode((menu_width, menu_height))
                 for i in button_menu.sprites():
                     if i.rect.collidepoint(event.pos):
                         return
