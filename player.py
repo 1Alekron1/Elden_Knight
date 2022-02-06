@@ -30,6 +30,8 @@ class Player(Character):
         self.money = open('data/player/save/money.txt').read().strip()
         self.change = 0
         self.kills = 0
+        with open('data/player/save/sword.txt') as f:
+            self.attack = float(f.read().strip())
 
     def get_input(self):
         keys = pygame.key.get_pressed()

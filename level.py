@@ -1,5 +1,5 @@
 import pygame
-from tiles import StaticTile, AnimatedTile, Background, HealthBar, MoneyBar, ReturnButton
+from tiles import StaticTile, AnimatedTile, Background, HealthBar, MoneyBar, ReturnButton, Chest
 from settings import tile_size, screen_width, screeen_height
 from player import Player
 from importing import import_csv_layout, import_image
@@ -87,7 +87,7 @@ class Level:
                             chests_tile_list = import_image(
                                 'data/tiles_map/graphics/decorations.png')
                             tile_surface = chests_tile_list[int(col)]
-                            sprite = StaticTile((x, y), tile_size, tile_surface)
+                            sprite = Chest((x, y), tile_size, tile_surface)
                         elif type_t == 'bushes':
                             chests_tile_list = import_image(
                                 'data/tiles_map/graphics/decorations.png')
@@ -171,12 +171,12 @@ class Level:
         for enemy in self.enemy.sprites():
             if pygame.sprite.collide_mask(player, enemy) and player.attacking1 and \
                     player.alive and enemy.is_resistant == 100 and enemy.alivec and enemy.health > 0:
-                enemy.health -= 0.25
+                enemy.health -= player.attack
                 print(enemy.health)
                 enemy.is_resistant = 0
                 enemy.cur_frame = 0
                 enemy.attacking1 = False
-                if enemy.health == 0:
+                if enemy.health <= 0:
                     player.change += 100
                     player.kills += 1
 
@@ -249,7 +249,11 @@ class Level:
 
         self.chest_sprites.update(self.world_shift)
         self.chest_sprites.draw(self.display)
-        self.enemy.update(self.world_shift)
+        for chest in self.chest_sprites.sprites():
+            keys = pygame.key.get_pressed()
+            if self.player.sprite.rect.colliderect(chest.rect) and keys[pygame.K_e]:
+                chest.animate(self.player.sprite)
+        self.enemy.update(self.world_shift, self.display)
         self.enemy.draw(self.display)
         self.enemy_trigger()
         self.player.update()

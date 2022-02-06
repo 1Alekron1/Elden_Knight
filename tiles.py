@@ -1,5 +1,6 @@
 import pygame
 from sprite_cutter import AnimatedSprite
+import random
 
 patterns = {'floor': 'floor.png', 'big_floor': 'big_floor.png', 'vertical': 'vertical.png',
             'triple': 'triple.png'}
@@ -57,8 +58,8 @@ class HealthBar(pygame.sprite.Sprite):
 
     def update(self, surface, health):
         pygame.draw.rect(surface, (255, 0, 0), (
-        self.pos[0] + 11, self.pos[1] + 5, (self.image.get_width() - 14) * health,
-        self.image.get_height() - 10))
+            self.pos[0] + 11, self.pos[1] + 5, (self.image.get_width() - 14) * health,
+            self.image.get_height() - 10))
 
 
 class MoneyBar(pygame.sprite.Sprite):
@@ -81,3 +82,13 @@ class ReturnButton(pygame.sprite.Sprite):
         self.image = pygame.image.load('data/menu/Home.png').convert_alpha()
         self.rect = self.image.get_rect(topleft=pos)
         self.pos = pos
+
+
+class Chest(StaticTile):
+    def __init__(self, pos, size, surface):
+        super().__init__(pos, size, surface)
+        self.rect = self.image.get_rect(topleft=pos)
+
+    def animate(self, player):
+        self.kill()
+        player.change += 1000

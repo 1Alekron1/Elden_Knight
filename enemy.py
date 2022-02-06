@@ -22,7 +22,7 @@ class Enemy(Character):
         self.is_resistant = 100
         self.ready = 200
 
-    def update(self, x_shift):
+    def update(self, x_shift, screen):
         self.rect.x += int(x_shift * 0.75)
         if self.health <= 0 and self.alivec:
             self.death_frame = (self.death_frame + 0.05)
@@ -67,6 +67,11 @@ class Enemy(Character):
                         self.image = pygame.transform.flip(
                             self.run[int(self.cur_frame)], True, False)
                 self.mask = pygame.mask.from_surface(self.image)
+        if self.health >= 0:
+            pygame.draw.rect(screen, pygame.Color(0, 0, 0),
+                             (self.rect.left + 128, self.rect.top + 78, 94, 11), 2, 3)
+            pygame.draw.rect(screen, pygame.Color(255, 0, 0),
+                             [self.rect.left + 130, self.rect.top + 80, (60 * self.health), 7], 0, 3)
 
     def restart(self):
         self.rect.topleft = self.initial_cords
