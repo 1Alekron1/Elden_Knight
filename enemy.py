@@ -4,7 +4,7 @@ from Character import Character
 
 
 class Enemy(Character):
-    def __init__(self, pos):
+    def __init__(self, pos, health):
         super().__init__(pos)
         self.idle = import_folder('data/enemy/idle', 5.5)
         self.run = import_folder('data/enemy/run', 5.5)
@@ -16,9 +16,10 @@ class Enemy(Character):
         self.rect = self.image.get_rect(topleft=pos)
         self.is_collapsing = False
         self.mask = pygame.mask.from_surface(self.image)
-        self.health = 1.5
+        self.health = health
         self.death_frame = 0
         self.alivec = True
+        self.initial = health
         self.is_resistant = 100
         self.ready = 200
 
@@ -69,7 +70,7 @@ class Enemy(Character):
                 self.mask = pygame.mask.from_surface(self.image)
         if self.health >= 0:
             pygame.draw.rect(screen, pygame.Color(0, 0, 0),
-                             (self.rect.left + 128, self.rect.top + 78, 94, 11), 2, 3)
+                             (self.rect.left + 128, self.rect.top + 78, (60 * self.initial) + 4, 11), 2, 3)
             pygame.draw.rect(screen, pygame.Color(255, 0, 0),
                              [self.rect.left + 130, self.rect.top + 80, (60 * self.health), 7], 0, 3)
 
@@ -78,6 +79,6 @@ class Enemy(Character):
         self.attacking1 = False
         self.direction = 1
         self.alivec = True
-        self.health = 1.5
+        self.health = self.initial
         self.cur_frame = False
         self.frame_attack = False

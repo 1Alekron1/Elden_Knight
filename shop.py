@@ -50,6 +50,9 @@ class Button(pygame.sprite.Sprite):
 
 
 def shop():
+    global active_swords
+    with open('data/player/save/active.txt') as f:
+        active_swords = [int(i.strip()) for i in f.readlines()]
     pygame.init()
     screen = pygame.display.set_mode((menu_width, menu_height))
     background = pygame.image.load('data/menu/foggy.png')

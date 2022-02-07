@@ -40,9 +40,9 @@ class AnimatedTile(Tile):
 
 
 class Background(Tile):
-    def __init__(self, pos, size):
+    def __init__(self, pos, size, path):
         super().__init__(pos, size)
-        self.image = pygame.image.load('data/tiles_map/BG/background.jpg')
+        self.image = pygame.image.load(path)
         self.rect = self.image.get_rect(topleft=pos)
 
     def update(self, x_shift):
@@ -91,4 +91,4 @@ class Chest(StaticTile):
 
     def animate(self, player):
         self.kill()
-        player.change += 1000
+        player.change += 500

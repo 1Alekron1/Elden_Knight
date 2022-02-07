@@ -4,7 +4,7 @@ from level import Level
 from game_data import *
 from results import results
 
-levels = {'level1': level_1}
+levels = {'level1': level_1, 'level2': level_2, 'level3': level_3}
 
 
 def main(typ):

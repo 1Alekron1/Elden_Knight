@@ -16,8 +16,9 @@ class Level:
         self.player = pygame.sprite.GroupSingle(Player((100, 100)))
 
         # Enemy define
-        self.enemy = pygame.sprite.Group(Enemy(level_data['enemy_pos'][0]),
-                                         Enemy(level_data['enemy_pos'][1]))
+        self.enemy = pygame.sprite.Group()
+        for i in level_data['enemy_pos']:
+            self.enemy.add(Enemy(i[0], i[1]))
 
         terrain_layout = import_csv_layout(level_data['terrain'])
         self.terrain_sprites = self.setup(terrain_layout, 'terrain')
@@ -41,7 +42,7 @@ class Level:
         self.bush_sprites = self.setup(bush_layout, 'bushes')
 
         self.background_sprite = pygame.sprite.Group(
-            Background((-screen_width // 4, 0), screen_width))
+            Background((-screen_width // 4, 0), screen_width, level_data['back']))
 
         self.health_bar_sprite = pygame.sprite.Group(HealthBar((30, 30)))
 
@@ -118,17 +119,17 @@ class Level:
         for enemy in self.enemy.sprites():
             f = 1
             if 130 < abs(
-                    player.rect.centerx - enemy.rect.centerx) <= 400 and not enemy.attacking1 and \
+                    player.rect.centerx - enemy.rect.centerx) <= 700 and not enemy.attacking1 and \
                     enemy.alivec and enemy.health > 0:
                 check = False
                 changed = enemy.direction
                 enemy.moving = 1
                 if player.rect.centerx > enemy.rect.centerx:
                     enemy.direction = 1
-                    enemy.dirx = 1
+                    enemy.dirx = 1.5
                 else:
                     enemy.direction = -1
-                    enemy.dirx = -1
+                    enemy.dirx = -1.5
                 for sprite in self.barriers:
                     if tile_size <= abs(enemy.rect.centerx - sprite.rect.centerx) <= tile_size + 7:
                         check = False
@@ -298,5 +299,6 @@ class Level:
             i.restart()
         for i in self.finish:
             i.restart()
-        self.enemy = pygame.sprite.Group(Enemy(level_data['enemy_pos'][0]),
-                                         Enemy(level_data['enemy_pos'][1]))
+        self.enemy = pygame.sprite.Group()
+        for i in level_data['enemy_pos']:
+            self.enemy.add(Enemy(i[0], i[1]))
